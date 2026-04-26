@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <span id="refresh" title="Atualizar">🔄</span>
+  </div>
+
+
+  <!-- AGENTE -->
+  <div class="card">
+    <span class="label">👤 Agente</span>
+    <span id="agent" class="value">-</span>
+  </div>
+
+  <!-- STATUS -->
+  <div class="card">
+    <span class="label">💬 Status</span>
+    <div class="status-box">
+      <span id="statusDot" class="dot"></span>
+      <span id="statusText" class="value">-</span>
+    </div>
+  </div>
+
+  <!-- SATISFAÇÃO -->
+  <div class="card">
+    <span class="label">📊 Satisfação</span>
+    <span id="satisfaction" class="value">-</span>
+  </div>
+
+  <!-- CONVERSÃO -->
+  <div class="card">
+    <span class="label">⚡ Conversão</span>
+    <span id="conversion" class="value">-</span>
+  </div>
+
+  <!-- ALERTA -->
+  <div class="card">
+    <label class="toggle">
+      <span id="bell" class="bell">🔔</span>
+      <input type="checkbox" id="toggleAlert">
+      <span>Alerta offline</span>
+    </label>
+  </div>
+
+</div>
+
+<!-- RODAPÉ -->
+<div class="footer">
+  <span class="logo-tech">GFlow v1.0</span>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

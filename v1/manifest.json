@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "GFlow",
+  "version": "1.0",
+  "description": "Monitoramento Movidesk",
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icon-128.png"
+    }
+  },
+
+  "icons": {
+    "128": "icon-128.png"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "permissions": [
+    "alarms",
+    "scripting",
+    "tabs",
+    "storage",
+    "offscreen"
+  ],
+
+  "host_permissions": [
+    "*://*.movidesk.com/*"
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["alert.mp3", "soft.mp3", "tech.mp3"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
