@@ -10,9 +10,12 @@
 
   <!-- HEADER -->
   <div class="header">
-    <span id="refresh" title="Atualizar">🔄</span>
+    <div class="switch-container">
+      <span>Modo noturno</span>
+      <input type="checkbox" id="switch" class="switch-input">
+      <label for="switch" class="switch-label"></label>
+    </div>
   </div>
-
 
   <!-- AGENTE -->
   <div class="card">
@@ -46,13 +49,49 @@
     <label class="toggle">
       <span id="bell" class="bell">🔔</span>
       <input type="checkbox" id="toggleAlert">
-      <span>Alerta offline</span>
+      <span>Notificar quando offline na fila</span>
     </label>
   </div>
+    <!-- SOM -->
+<div class="card config-card">
+
+  <div class="config-header">
+    🔊 Som da notificação
+  </div>
+
+  <div class="sound-options-modern">
+
+    <label class="radio-card">
+      <input type="radio" name="alertSound" value="alert">
+      <span>Bomb</span>
+    </label>
+
+    <label class="radio-card">
+      <input type="radio" name="alertSound" value="soft">
+      <span>Clean</span>
+    </label>
+
+    <label class="radio-card">
+      <input type="radio" name="alertSound" value="tech">
+      <span>Light</span>
+    </label>
+
+  </div>
+
+  <div class="volume-box">
+    <div class="volume-header">
+      <span>Volume</span>
+      <span id="volumeValue">50%</span>
+    </div>
+
+    <input type="range" id="volumeControl" min="0" max="1" step="0.01">
+  </div>
+
+
 
 </div>
 
-<!-- RODAPÉ -->
+<!-- FOOTER -->
 <div class="footer">
   <span class="logo-tech">GFlow v1.0</span>
 </div>

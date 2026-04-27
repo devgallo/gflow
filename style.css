@@ -1,39 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
+
+/* =========================
+   BASE DA PÁGINA
+========================= */
+
 body {
-  width: 300px;
+  width: 250px;
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Rajdhani', sans-serif;
+
   background: #f5f6fa;
+  color: #111;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* CONTAINER */
-.container {
-  padding: 10px;
+/* DARK MODE */
+body.dark-mode {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
 }
 
-/* HEADER CENTRALIZADO */
+
+/* =========================
+   HEADER
+========================= */
+
 .header {
   display: flex;
+  align-items: center;
   justify-content: center;
   position: relative;
-  margin-bottom: 12px;
+  padding: 10px 12px;
 }
 
-/* FONTE TECH */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
-
-.logo.tech {
+/* LOGO */
+.logo-tech {
   font-family: 'Orbitron', sans-serif;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1px;
 
   background: linear-gradient(
     90deg,
-    #00f0ff,
-    #00a8ff,
-    #00f0ff,
-    #ffffff,
-    #00f0ff
+    #dbd82e,
+    #fcfbfa,
+    #000000,
+    #030303
   );
 
   background-size: 200% auto;
@@ -45,45 +61,99 @@ body {
   animation: energyFlow 2s linear infinite;
 }
 
-/* ANIMAÇÃO DE ENERGIA */
 @keyframes energyFlow {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
 }
 
-/* botão refresh no canto */
-#refresh {
+
+/* =========================
+   SWITCH (modo noturno)
+========================= */
+
+.switch-container {
   position: absolute;
-  right: 0;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.switch-container span {
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.switch-input {
+  display: none;
+}
+
+.switch-label {
+  width: 40px;
+  height: 22px;
+  background-color: #ccc;
+  border-radius: 999px;
+  position: relative;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-/* EFEITO RAIO */
-@keyframes glow {
-  0% {
-    text-shadow: 0 0 2px #00a8ff, 0 0 4px #00a8ff;
-  }
-  100% {
-    text-shadow: 0 0 6px #00a8ff, 0 0 12px #00a8ff;
-  }
+.switch-label::after {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s ease;
 }
 
-/* CARD */
+.switch-input:checked + .switch-label {
+  background-color: #4CAF50;
+}
+
+.switch-input:checked + .switch-label::after {
+  transform: translateX(18px);
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
 .card {
   background: #ffffff;
   border-radius: 8px;
-  padding: 8px;
-  margin-bottom: 8px;
+
+  padding: 10px 12px;
+  margin: 6px 10px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  box-sizing: border-box;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05); /* EXTRA */
 }
 
-/* TEXTOS */
+/* DARK MODE CARD */
+body.dark-mode .card {
+  background: #2a2a2a;
+  border: 1px solid rgba(255,255,255,0.05); /* EXTRA */
+}
+
+
+/* =========================
+   TEXTOS (CORRIGIDO)
+========================= */
+
+/* LIGHT */
 .label {
   font-size: 12px;
   color: #555;
@@ -91,20 +161,34 @@ body {
 
 .value {
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 600;
+  color: #111;
 }
 
-/* STATUS */
+/* DARK */
+body.dark-mode .label {
+  color: #b0b0b0;
+}
+
+body.dark-mode .value {
+  color: #ffffff;
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
 .status-box {
   display: flex;
   align-items: center;
+  gap: 6px;
 }
 
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  margin-right: 6px;
   background: gray;
 }
 
@@ -116,68 +200,197 @@ body {
   background: #e74c3c;
 }
 
-/* ALERTA */
-.toggle {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-}
 
-/* SINO */
+/* =========================
+   ALERTA (SINO)
+========================= */
+
 .bell {
   display: inline-block;
+  transform-origin: top center;
 }
 
-/* animação de vibração */
 .bell-active {
-  animation: shake 0.5s infinite;
+  animation: bellShake 0.6s ease-in-out infinite;
 }
 
-@keyframes shake {
-  0% { transform: rotate(0deg); }
-  25% { transform: rotate(10deg); }
-  50% { transform: rotate(-10deg); }
-  75% { transform: rotate(10deg); }
+@keyframes bellShake {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(12deg); }
+  30%  { transform: rotate(-10deg); }
+  45%  { transform: rotate(8deg); }
+  60%  { transform: rotate(-6deg); }
+  75%  { transform: rotate(4deg); }
   100% { transform: rotate(0deg); }
 }
-/* FOOTER */
+
+
+/* =========================
+   CONFIG CARD (PREMIUM)
+========================= */
+
+.config-card {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.config-header {
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+
+/* =========================
+   RADIO PREMIUM
+========================= */
+
+.sound-options-modern {
+  display: flex;
+  gap: 6px;
+}
+
+.radio-card {
+  flex: 1;
+  text-align: center;
+  padding: 8px 6px;
+
+  border-radius: 8px;
+  background: #f1f2f6;
+
+  cursor: pointer;
+  font-size: 12px;
+
+  transition: all 0.2s ease;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.radio-card input {
+  display: none;
+}
+
+.radio-card:hover {
+  transform: translateY(-1px);
+  background: #e6e9ef;
+}
+
+.radio-card input:checked + span {
+  font-weight: 600;
+}
+
+.radio-card:has(input:checked) {
+  background: linear-gradient(135deg, #00a8ff20, #00a8ff10);
+  border: 1px solid #00a8ff;
+  box-shadow: 0 0 6px #00a8ff40;
+}
+
+.radio-card:active {
+  transform: scale(0.96);
+}
+
+/* DARK */
+body.dark-mode .radio-card {
+  background: #2a2a2a;
+}
+
+body.dark-mode .radio-card:hover {
+  background: #333;
+}
+/* =========================
+   VOLUME PREMIUM
+========================= */
+
+.volume-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.volume-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #00a8ff var(--progress, 50%), #dcdde1 var(--progress, 50%));
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00a8ff;
+  cursor: pointer;
+  box-shadow: 0 0 6px #00a8ff80;
+}
+
+/* DARK */
+body.dark-mode input[type="range"] {
+  background: linear-gradient(90deg, #00a8ff var(--progress, 50%), #444 var(--progress, 50%));
+}
+
+
+/* =========================
+   BOTÃO
+========================= */
+
+.btn-primary {
+  width: 100%;
+  padding: 9px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: linear-gradient(90deg, #00a8ff, #0097e6);
+  color: white;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px #00a8ff40;
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
 .footer {
   text-align: center;
-  padding: 6px;
   font-size: 10px;
-  opacity: 0.7;
+  padding: 8px;
+  opacity: 0.6;
+  margin-top: auto;
 }
 
-/* FONTE MAIS CLEAN */
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600&display=swap');
 
-.logo-tech {
-  font-family: 'Rajdhani', sans-serif;
-  letter-spacing: 1px;
+/* =========================
+   UTIL
+========================= */
 
-  background: linear-gradient(
-    90deg,
-    #00a8ff,
-    #4cd137,
-    #00a8ff
-  );
-
-  background-size: 200% auto;
-
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  animation: energySoft 3s linear infinite;
+.hidden {
+  display: none;
 }
-
-/* ANIMAÇÃO MAIS SUAVE */
-@keyframes energySoft {
-  0% {
-    background-position: 0% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
+.value-good { color: #2ecc71; }
+.value-mid  { color: #f1c40f; }
+.value-bad  { color: #e74c3c; }

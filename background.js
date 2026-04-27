@@ -3,8 +3,11 @@ let lastAlertTime = 0;
 
 // 🔊 OFFSCREEN
 async function createOffscreen() {
-  const exists = await chrome.offscreen.hasDocument?.();
-  if (!exists) {
+  const contexts = await chrome.runtime.getContexts({
+    contextTypes: ["OFFSCREEN_DOCUMENT"]
+  });
+
+  if (contexts.length === 0) {
     await chrome.offscreen.createDocument({
       url: "offscreen.html",
       reasons: ["AUDIO_PLAYBACK"],
@@ -14,14 +17,20 @@ async function createOffscreen() {
 }
 
 async function playAlertSound() {
-  const { sound, volume } = await chrome.storage.local.get(["sound", "volume"]);
+  const data = await chrome.storage.local.get([
+    "alertSound",
+    "alertVolume"
+  ]);
+
+  const sound = data.alertSound || "alert";
+  const volume = data.alertVolume ?? 0.5;
 
   await createOffscreen();
 
   chrome.runtime.sendMessage({
     type: "PLAY_SOUND",
-    sound: sound || "alert.mp3",
-    volume: volume ?? 1
+    sound: `sounds/${sound}.mp3`,
+    volume: volume
   });
 }
 
